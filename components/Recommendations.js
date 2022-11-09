@@ -58,7 +58,7 @@ const Recommendations = () => {
             </div>
             <div className={styles.authorName}></div>
             <div className={styles.authorFollowing}>
-               followers
+               1M followers
             </div>
             <div className={styles.authorActions}>
               <button className={styles.actionButton}>Follow</button>
