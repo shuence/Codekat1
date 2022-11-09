@@ -1,7 +1,10 @@
+import ReadersNav from "../../components/ReadersNav"
 
 const Post = () => {
   return (
-    <div>Post Page</div>
+    <div>
+      <ReadersNav />
+    </div>    
   )
 }
 
