@@ -2,8 +2,8 @@ import Image from 'next/image'
 import Logo from './../static/banner.png'
 
 const styles = {
-  wrapper: `h-max-[20rem] flex items-center justify-center py-3 px-10 border-y border-black bg-[#FCC017]`,
-  content: `max-w-8xl flex-1 flex items-center justify-between`,
+  wrapper: `h-max-[20rem] flex items-center py-5 justify-center border-y border-black bg-[#FCC017]`,
+  content: `max-w-8xl flex-1 space-y-4 flex items-center justify-between`,
   accentedButton: `bg-black text-white py-2 px-4 rounded-full`,
 }
 
@@ -26,7 +26,7 @@ const Banner = () => {
         </div>
 
         <Image
-          className='hidden h-45 md:inline-flex object-contain flex-1'
+          className='hidden h-40 md:inline-flex object-contain flex-1'
           src={Logo.src}
           height={400}
           width={500}
