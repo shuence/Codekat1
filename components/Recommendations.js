@@ -9,7 +9,7 @@ import Avneet from '../static/Avneet.jpg'
 import JSLogo from '../static/jsLogo.png'
 
 const styles = {
-  wrapper: `h-screen min-w-[10rem] max-w-[30rem] flex-[1.2] p-[2rem]`,
+  wrapper: `h-screen min-w-[10rem] max-w-[30rem] flex-[1.2] p-[2rem] overflow-scroll`,
   accentedButton: `flex items-center justify-center text-sm bg-black text-white my-[2rem] py-[.6rem] rounded-full`,
   searchBar: `flex items-center gap-[.6rem] h-[2.6rem] border px-[1rem] rounded-full`,
   searchInput: `border-none outline-none bg-none w-full`,
@@ -32,7 +32,7 @@ const styles = {
   recommendationThumbnail: `object-cover`,
 }
 
-const Recommendations = () => {
+const Recommendations = ({ author }) => {
 
   return (
     <div className={styles.wrapper}>
@@ -56,9 +56,9 @@ const Recommendations = () => {
                 height={100}
               />
             </div>
-            <div className={styles.authorName}></div>
+            <div className={styles.authorName}> Shuence</div>
             <div className={styles.authorFollowing}>
-               1M followers
+              1M followers
             </div>
             <div className={styles.authorActions}>
               <button className={styles.actionButton}>Follow</button>
@@ -67,12 +67,11 @@ const Recommendations = () => {
               </button>
             </div>
           </div>
-        
-
         <div className={styles.recommendationContainer}>
           <div className={styles.title}>More from Medium</div>
           <div className={styles.articlesContainer}>
-              <div className={styles.articleContentWrapper}>
+            {recommendedPosts.map(post => (
+              <div key={post.id} className={styles.articleContentWrapper}>
                 <div className={styles.articleContent}>
                   <div className={styles.recommendationAuthorContainer}>
                     <div
@@ -81,29 +80,29 @@ const Recommendations = () => {
                       }
                     >
                       <Image
-                        src={Avneet}
+                        src={post.author.image}
                         alt='author'
                         height={100}
                         width={100}
                       />
                     </div>
                     <div className={styles.recommendationAuthorName}>
-                      Shuence
+                      {post.author.name}
                     </div>
                   </div>
-                  <div className={styles.recommendationTitle}>Hey I'm Here</div>
+                  <div className={styles.recommendationTitle}>{post.title}</div>
                 </div>
                 <div className={styles.recommendationThumbnailContainer}>
                   <Image
                     className={styles.recommendationThumbnail}
-                    src={JSLogo}
+                    src={post.image}
                     alt='thumbnail'
                     height={100}
                     width={100}
                   />
                 </div>
               </div>
-            
+            ))}
           </div>
         </div>
       </>
@@ -113,3 +112,29 @@ const Recommendations = () => {
 
 export default Recommendations
 
+const recommendedPosts = [
+  {
+    title: 'What can you do with Replit?',
+    image: ReplitLogo,
+    author: {
+      name: 'Clever Programmer',
+      image: CPLogo,
+    },
+  },
+  {
+    title: 'The Ultimate JavaScript Course for Beginners by Clever Programmer',
+    image: TutorialImg,
+    author: {
+      name: 'Rafeh Qazi',
+      image: Avneet,
+    },
+  },
+  {
+    title: 'How to Become a Developer in 2022?',
+    image: JSLogo,
+    author: {
+      name: 'Clever Programmer',
+      image: CPLogo,
+    },
+  },
+]

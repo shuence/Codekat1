@@ -20,6 +20,7 @@ const Header = () => {
             src={logo}
             height={40}
             width={200}
+            alt='logo'
             />
         </div>
 

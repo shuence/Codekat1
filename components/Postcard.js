@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import Logo from '../static/logo.png'
-import {FiBookmark} from 'react-icons/fi'
-import Banner from '../static/banner.png'
 import Link from 'next/link'
-
+import { useState, useEffect } from 'react'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../firebase'
+import { FiBookmark } from 'react-icons/fi'
 
 const styles = {
   wrapper: `max-w-[46rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer`,
@@ -21,37 +21,56 @@ const styles = {
   thumbnailContainer: `flex-1`,
 }
 
+const PostCard = ({ post }) => {
+  const [authorData, setAuthorData] = useState(null)
 
-const PostCard = () => {
+  useEffect(() => {
+    const getAuthorData = async () => {
+      setAuthorData(
+        await (await getDoc(doc(db, 'users', post.data.author))).data(),
+      )
+    }
+
+    getAuthorData()
+  }, [post])
 
   return (
-    <Link href={'/post/123'}>
+    <Link href={`/post/${post.id}`}>
       <div className={styles.wrapper}>
         <div className={styles.postDetails}>
           <div className={styles.authorContainer}>
             <div className={styles.authorImageContainer}>
+              {authorData && (
                 <Image
-                  src={Logo}
+                  src={`https://res.cloudinary.com/demo/image/fetch/${authorData.imageurl}`}
                   alt='author'
                   className={styles.authorImage}
                   height={40}
                   width={40}
                 />
-              
+              )}
             </div>
-            <div className={styles.authorName}>Shuence</div>
+            <div className={styles.authorName}>{authorData?.name}</div>
           </div>
-          <h1 className={styles.title}>7 Free tools that make you more productive </h1>
-          <div className={styles.briefing}>Productivity is a skill that can be learned</div>
+          <h1 className={styles.title}>{post.data.title}</h1>
+          <div className={styles.briefing}>{post.data.brief}</div>
           <div className={styles.detailsContainer}>
-          <span classname={styles.articleDetails}> Jun 15 • 5 min read • 
-          <span className={styles.category}>Productivity</span></span>
-          <span classname={styles.bookmarkContainer}><FiBookmark classname='h-5 w-5'/></span>
-        </div>
+            <span className={styles.articleDetails}>
+              {new Date(post.data.postedOn).toLocaleString('en-US', {
+                day: 'numeric',
+                month: 'short',
+              })}
+              • {post.data.postLength} min read •{' '}
+              <span className={styles.category}>{post.data.category}</span>
+            </span>
+            <span className={styles.bookmarkContainer}>
+              <FiBookmark className='h-5 w-5' />
+            </span>
+          </div>
         </div>
         <div className={styles.thumbnailContainer}>
           <Image
-            src={Banner}
+            src={`https://res.cloudinary.com/demo/image/fetch/${post.data.bannerimage}`}
             alt='thumbnail'
             height={100}
             width={100}
@@ -59,7 +78,6 @@ const PostCard = () => {
         </div>
       </div>
     </Link>
-
   )
 }
 
