@@ -3,6 +3,7 @@ import Banner from "../components/banner"
 import Postcard from "../components/Postcard"
 
 
+
 export default function Home() {
   
     const styles = {

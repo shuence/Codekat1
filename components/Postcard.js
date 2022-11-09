@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Logo from '../static/logo.png'
 import {FiBookmark} from 'react-icons/fi'
 import Banner from '../static/banner.png'
+import Link from 'next/link'
+
 
 const styles = {
   wrapper: `max-w-[46rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer`,
