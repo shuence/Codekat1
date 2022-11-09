@@ -5,4 +5,4 @@ const Post = () => {
   )
 }
 
-export default [slug]
+export default Post
