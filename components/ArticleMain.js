@@ -83,7 +83,7 @@ const ArticleMain = ({ post, author }) => {
                   Shuence,
                  11/12/2022
                 </div>
-                <div>Hello I'm Here so tum log yye padho</div>
+                <div>Hello I'm Here so tum log ye padho</div>
               </h4>
               <div className={styles.articleText}>You are Idiots Who are reading this</div>
             </div>
